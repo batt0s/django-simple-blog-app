@@ -18,7 +18,7 @@ Now you can run the app :
 <br>
 2 - run <pre><code>python3 manage.py runserver</code></pre> in your shell
 <br><br>
-To create superuser accout : 
+To create superuser account : 
 <br>
 1 - cd to directory where manage.py
 <br>
