@@ -1,0 +1,97 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+    {% if article %}
+    {{ article.title }}
+    {% else %}
+    Article
+    {% endif %}
+
+{% endblock title %}
+
+
+{% block body %}
+
+<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
+
+
+<div>
+
+    <div>
+
+        <h1>{{ article.title }}</h1>
+
+        <hr>
+
+
+        <small>
+            Author : {{ article.author }}
+        </small>
+
+        <br>
+
+        <small>Publish date : {{ article.pub_date }}</small>
+
+
+        <hr>
+
+        <p>
+            {{ article.content|safe }}
+        </p>
+
+        <br>
+        <hr>
+        <br>
+
+        <h5>Comment</h5>
+        <br>
+        <form method="POST" action="{% url 'article:comment' article.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="comment_author">Name</label>
+                <input type="text" name="comment_author" class="form-control" rows="3" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="comment_author_email">Email Address</label>
+                <input type="email" name="comment_author_email" class="form-control" rows="3" placeholder="">
+                <small>* Nobody will see your email address except us.</small>
+            </div>
+            <div class="form-group">
+              <label for="comment_content">Comment</label>
+              <textarea name="comment_content" class="form-control" rows="3" placeholder=""></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Publish</button>
+        </form>
+        <br><hr><br>
+        <h5>Comments</h5>
+        <br>
+        {% if comments %}
+        <table class="table table-striped">
+            <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td style="width: 10%;">{{ comment.comment_author }}</td>
+                        <td style="width: 15%;">{{ comment.pub_date }}</td>
+                        <td>{{ comment.comment_content }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <br><br>
+        <div class="alert alert-danger" role="alert">
+            No comment.
+        </div>
+        {% endif %}
+       
+        
+
+    </div>
+
+    
+</div>
+
+
+
+{% endblock body %}

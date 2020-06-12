@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Add Article
+{% endblock title %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+<div style="padding-left: 10%; padding-right: 10%;">
+  <h3>Create Article</h3>
+  <hr>
+  <form class="form-signin" method="POST">
+      {% csrf_token %}
+    
+      {% if form %}
+        {{ form.media }}
+        {{ form|crispy }}
+        <br>
+        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add Article</button>
+      {% else %}
+      <div class="alert alert-danger" role="alert">
+        Adding articles is not allowed.
+      </div>
+      {% endif %}
+    
+  </form>
+</div>
+
+{% endblock body %}
+

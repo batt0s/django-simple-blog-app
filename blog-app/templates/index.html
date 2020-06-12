@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+
+
+<div class="row">
+    <div class="col">
+        <div class="jumbotron text-center">
+            <h3>Lorem Ipsum</h3>
+            <hr>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu libero quam. Donec sed mi vel justo sodales vulputate eu pretium mauris. In imperdiet molestie nibh, sit amet congue sem hendrerit sed. Curabitur quam lorem, sollicitudin id erat eget, pretium egestas mauris. Fusce sem diam, auctor ut euismod vitae, maximus nec justo. Praesent eleifend luctus orci et pulvinar. Etiam lobortis, massa vitae hendrerit euismod, velit velit ultricies lorem, vitae commodo augue libero sit amet magna. Donec iaculis, est eget efficitur molestie, lectus velit lacinia nunc, vel sollicitudin massa enim ac nulla. Sed et pretium justo. Nullam auctor, sapien quis pharetra tincidunt, neque dui malesuada mi, a finibus magna nisi vel ex. Nam elementum, sem ut sodales fringilla, dolor quam tempor risus, non scelerisque orci justo vel dui. Nulla fringilla aliquet turpis, a vehicula orci egestas id. Vestibulum vestibulum odio sed felis lobortis vestibulum.</p>
+        </div>
+
+        {% if article %}
+
+            <div class="jumbotron">
+                <h3>Last added article.</h3>
+                <hr>
+                <h2>{{ article.title }}</h2>
+
+                <hr>
+
+
+                <small>
+                    Author : {{ article.author }}
+                </small>
+
+                <br>
+
+                <small>Publish date : {{ article.pub_date }}</small>
+
+
+                <hr>
+
+                <p>
+                    {{ article.content|safe|truncatewords:100 }}
+                </p>
+
+                <a href="{% url 'article:detail' article.id %}">Read more</a>
+            
+            </div>
+        {% endif %}
+    </div>
+    
+</div>
+
+{% endblock body %}

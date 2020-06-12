@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Articles
+{% endblock title %}
+
+{% block body %}
+
+<div style="padding-left: 10%; padding-right: 10%;">
+
+    <h3>Articles</h3>
+    <hr>
+    <form class="form-inline my-2 my-lg-0">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Keywords" aria-label="Search" name="keyword">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <br>
+
+</div>
+{% if articles %}
+
+{% for article in articles %}
+    
+<div style="padding-left: 10%; padding-right: 10%;">
+    <div class="jumbotron">
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <h1>{{ article.title }}</h1>
+
+                <hr>
+
+
+                <small>
+                    Author : {{ article.author }}
+                </small>
+
+                <br>
+
+                <small>Publish date : {{ article.pub_date }}</small>
+
+
+                <hr>
+
+                <p>
+                    {{ article.content|safe|truncatewords:100 }}
+                </p>
+
+                <a href="{% url 'article:detail' article.id %}">Read more</a>
+
+            </div>
+        </div>
+
+    </div>
+    <br><br>
+    <hr>
+
+    <br><br>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+<div class="alert alert-danger" role="alert">
+    No articles were found or no articles related to the specified keywords were found.
+</div>
+{% endif %}
+
+{% endblock body %}

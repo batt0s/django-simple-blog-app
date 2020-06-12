@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Dashboard
+{% endblock title %}
+
+{% block body %}
+
+<div>
+    <h3>Dashboard</h3>
+    <small>Wellcome, {{user.username}}</small>
+    <hr>
+    <h4>User Info</h4>
+    {% if user.is_authenticated %}
+    <p>First Name : {{user.first_name}}</p>
+    <p>Last Name : {{user.last_name}}</p>
+    <p>Email Adress : {{user.email}}</p>
+    <p>Username : {{user.username}}</p>
+    <br>
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        No info.
+    </div>
+    {% endif %}
+    <hr>
+    <h4>Articles</h4>
+    <br>
+    
+    <br>
+    {% if articles %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Publish date</th>
+            <th scope="col"></th>
+            <th scope="col"><a href="{% url 'article:createArticle' %}"><button type="button" class="btn btn-primary">Add Article</button></a></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+
+            <tr>
+                <td><a href="{% url 'article:detail' article.id %}">{{article.title}}</a></td>
+                <td>{{article.pub_date}}</td>
+                <th><a href="{% url 'article:edit' article.id %}"><button type="button" class="btn btn-primary">Edit</button></a></th>
+                <th><a href="{% url 'article:delete' article.id %}"><button type="button" class="btn btn-danger">Delete</button></a></th>
+            </tr>
+                
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <br>
+    <a href="{% url 'article:createArticle' %}"><button type="button" class="btn btn-primary">Add Article</button></a>
+    <br><br>
+    <div class="alert alert-danger" role="alert">
+        You have no articles.
+    </div>
+    {% endif %}
+
+    <br><br><hr>
+    <h4>Comments</h4>
+    <br>
+
+    {% if comments %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">E-Mail</th>
+            <th scope="col">Date</th>
+            <th scope="col">Comment</th>
+            <th scope="col">Article</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+
+            <tr>
+                <td style="width: 10%;">{{ comment.comment_author }}</td>
+                <td style="width: 10%;">{{ comment.comment_author_email }}</td>
+                <td style="width: 10%;">{{ comment.pub_date }}</td>
+                <td>{{ comment.comment_content }}</td>
+                <td style="width: 15%;">{{ comment.article.title }}</td>
+            </tr>
+                
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <br><br>
+    <div class="alert alert-danger" role="alert">
+        There are no comments on your articles.
+    </div>
+    {% endif %}
+</div>
+
+{% endblock body %}

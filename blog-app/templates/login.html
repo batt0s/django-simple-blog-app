@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+<body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">Login</h5>
+              <form class="form-signin" method="POST">
+                  {% csrf_token %}
+                
+                  {% if form %}
+                    {{ form|crispy }}
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
+                  {% else %}
+                  <div class="alert alert-danger" role="alert">
+                    Login is not allowed.
+                  </div>
+                  {% endif %}
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+{% endblock body %}
