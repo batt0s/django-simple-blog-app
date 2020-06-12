@@ -10,16 +10,16 @@ To install packages you need:
 <br>
 1 - cd to directory where requirements.txt
 <br>
-2 - run  ```pip3 install -r requirements.txt ```  in your shell
+2 - run <pre><code>pip3 install -r requirements.txt</code></pre>  in your shell
 <br><br>
 Now you can run the app :
 <br>
 1 - cd to directory where manage.py
 <br>
-2 - run  ```python3 manage.py runserver```  in your shell
+2 - run <pre><code>python3 manage.py runserver</code></pre> in your shell
 <br><br>
 To create superuser accout : 
 <br>
 1 - cd to directory where manage.py
 <br>
-2 - run  ```python3 manage.py createsuperuser```  in your shell
+2 - run <pre><code>python3 manage.py createsuperuser</code></pre> in your shell
